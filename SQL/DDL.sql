@@ -4,12 +4,12 @@ CREATE SCHEMA IF NOT EXISTS public;
 CREATE TABLE IF NOT EXISTS public.individuos
 (
 	cpf CHAR(14) NOT NULL,
-	nome VARCHAR(20) NOT NULL,
+	nome VARCHAR(40) NOT NULL,
 	estado CHAR(2),
-	cidade VARCHAR(15),
-	data_nascimento DATE,
-	ficha_Limpa BOOLEAN NOT NULL,
-	tipo VARCHAR(8),
+	cidade VARCHAR(30),
+	dataNascimento DATE,
+	fichaLimpa BOOLEAN DEFAULT TRUE,
+	tipo VARCHAR(9),
 	
 	CONSTRAINT individuo_pk PRIMARY KEY(cpf),
 	CONSTRAINT individuo_un UNIQUE(nome),
@@ -20,29 +20,19 @@ CREATE TABLE IF NOT EXISTS public.individuos
 CREATE TABLE IF NOT EXISTS public.partidos
 (
 	sigla VARCHAR(4) NOT NULL,
-	nome VARCHAR(20) NOT NULL,
-	Programa VARCHAR(100) NOT NULL,
+	nome VARCHAR(40) NOT NULL,
+	Programa VARCHAR(150) NOT NULL,
 	
 	CONSTRAINT partido_pk PRIMARY KEY(sigla),
 	CONSTRAINT partido_un UNIQUE(nome)
-);
-
--- EQUIPE DE APOIO
-CREATE TABLE IF NOT EXISTS public.equipe_apoio
-(
-	idequipe SERIAL NOT NULL,
-	nome VARCHAR(20) NOT NULL,
-	
-	CONSTRAINT equipe_pk PRIMARY KEY(idequipe),
-	CONSTRAINT equipe_un UNIQUE(nome)
 );
 
 -- CANDIDATOS
 CREATE TABLE IF NOT EXISTS public.candidatos
 (
 	cpf CHAR(14) NOT NULL,
-	tem_vice BOOLEAN NOT NULL,
-	vice_candidato VARCHAR(20),
+	temVice BOOLEAN NOT NULL,
+	viceCandidato VARCHAR(40) DEFAULT '-',
 	partido VARCHAR(4),
 	
 	CONSTRAINT candidato_pk  PRIMARY KEY(cpf),
@@ -60,32 +50,18 @@ CREATE TABLE IF NOT EXISTS public.doadores
 	CONSTRAINT doador_fk FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE
 );
 
--- PARTICIPANTES DA EQUIPE DE APOIO
-CREATE TABLE IF NOT EXISTS public.participantes_equipe
-(
-	cpf CHAR(14) NOT NULL,
-	ano SMALLINT NOT NULL,
-	equipe SERIAL NOT NULL,
-	
-	CONSTRAINT part_equipe_pk  PRIMARY KEY(cpf),
-	CONSTRAINT part_equipe_fk1 FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE,
-	CONSTRAINT part_equipe_fk2 FOREIGN KEY(equipe) REFERENCES public.equipe_apoio(idequipe) ON DELETE CASCADE,
-	CONSTRAINT part_equipe_ck CHECK(ano < 2022)
-);
-
 -- CARGOS
 CREATE TABLE IF NOT EXISTS public.cargos
 (
 	idcargo SERIAL NOT NULL,
-	nome VARCHAR(20) NOT NULL,
-	estado CHAR(2) NOT NULL,
-	cidade VARCHAR(15) NOT NULL,
-	ano SMALLINT NOT NULL,
-	qtd_eleitos SMALLINT,
+	nome VARCHAR(40) NOT NULL,
+	tipoCargo VARCHAR(9) NOT NULL,
+	referencia VARCHAR(30) NOT NULL,
+	qtdEleitos SMALLINT DEFAULT 0,
 	
 	CONSTRAINT cargo_pk PRIMARY KEY(idcargo),
 	CONSTRAINT cargo_un UNIQUE(nome),
-	CONSTRAINT cargo_ck CHECK(ano < 2022)
+	CONSTRAINT cargo_ck CHECK(UPPER(tipoCargo) IN ('CIDADE', 'ESTADO', 'FEDERACAO'))
 );
 
 -- CANDIDATURA
@@ -95,7 +71,7 @@ CREATE TABLE IF NOT EXISTS public.candidaturas
 	candidato CHAR(14) NOT NULL,
 	cargo SERIAL NOT NULL,
 	ano SMALLINT NOT NULL,
-	qtd_votos SMALLINT,
+	qtdVotos SMALLINT,
 	
 	CONSTRAINT candidatura_pk PRIMARY KEY(idcandidatura),
 	CONSTRAINT candidatura_un UNIQUE(candidato, cargo, ano),
@@ -104,12 +80,37 @@ CREATE TABLE IF NOT EXISTS public.candidaturas
 	CONSTRAINT candidatura_fk2 FOREIGN KEY(cargo) REFERENCES public.cargos(idcargo) ON DELETE CASCADE	
 );
 
+-- EQUIPE DE APOIO
+CREATE TABLE IF NOT EXISTS public.equipeApoio
+(
+	idequipe SERIAL NOT NULL,
+	nome VARCHAR(40) NOT NULL,
+	candidatura SERIAL NOT NULL,
+	
+	CONSTRAINT equipe_pk PRIMARY KEY(idequipe),
+	CONSTRAINT equipe_un UNIQUE(nome),
+	CONSTRAINT equipe_fk FOREIGN KEY(candidatura) REFERENCES public.candidaturas(idcandidatura)
+);
+
+-- PARTICIPANTES DA EQUIPE DE APOIO
+CREATE TABLE IF NOT EXISTS public.participantesEquipe
+(
+	cpf CHAR(14) NOT NULL,
+	ano SMALLINT NOT NULL,
+	equipe SERIAL NOT NULL,
+	
+	CONSTRAINT part_equipe_pk  PRIMARY KEY(cpf),
+	CONSTRAINT part_equipe_fk1 FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE,
+	CONSTRAINT part_equipe_fk2 FOREIGN KEY(equipe) REFERENCES public.equipeApoio(idequipe) ON DELETE CASCADE,
+	CONSTRAINT part_equipe_ck CHECK(ano < 2022)
+);
+
 -- DoadorCandidatura
-CREATE TABLE IF NOT EXISTS public.doador_candidatura
+CREATE TABLE IF NOT EXISTS public.doadorCandidatura
 (
 	doador CHAR(14) NOT NULL,
 	candidatura SERIAL NOT NULL,
-	data_doacao DATE NOT NULL,
+	dataDoacao DATE NOT NULL,
 	valor FLOAT NOT NULL,
 	
 	CONSTRAINT doador_candidatura_pk  PRIMARY KEY(doador, candidatura),
@@ -121,18 +122,21 @@ CREATE TABLE IF NOT EXISTS public.doador_candidatura
 CREATE TABLE IF NOT EXISTS public.empresas
 (
 	cnpj CHAR(20) NOT NULL,
-	nome VARCHAR(25) NOT NULL,
+	nome VARCHAR(40) NOT NULL,
 	estado CHAR(2),
-	cidade VARCHAR(15),
-	data_fundacao DATE,
+	cidade VARCHAR(30),
+	dataFundacao DATE,
 	candidatura SERIAL,
 	valor FLOAT,
-	data_doacao DATE,
+	dataDoacao DATE,
 	
 	CONSTRAINT empresa_pk PRIMARY KEY(cnpj),
 	CONSTRAINT empresa_un UNIQUE(nome),
 	CONSTRAINT empresa_fk FOREIGN KEY(candidatura) REFERENCES public.candidaturas(idcandidatura) ON DELETE CASCADE
 	
 );
+
+-------- Triggers
+
 
 
