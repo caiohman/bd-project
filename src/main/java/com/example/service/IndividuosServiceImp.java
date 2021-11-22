@@ -5,6 +5,7 @@ import com.example.repository.IndividuosRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -22,6 +23,7 @@ public class IndividuosServiceImp implements IndividuoServiceInterface{
        return this.individuosRepository.listAll();
     }
 
+    @Transactional
     @Override
     public Individuos save(Individuos individuos) {
         this.individuosRepository.persist(individuos);
