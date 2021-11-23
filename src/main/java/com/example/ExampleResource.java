@@ -33,4 +33,8 @@ public class ExampleResource {
         return partidosServiceImp.save(partidos);
     }
 
+    @DELETE
+    @Transactional
+    public void deletePartidos(Partidos partidos) { partidosServiceImp.delete(partidos); }
+
 }

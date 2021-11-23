@@ -12,10 +12,22 @@ import javax.validation.constraints.Size;
 public class Candidatos {
     @Id
     @JoinColumn(name = "individuos")
-    private Long cpf;
+    @Size(max = 14)
+    private String cpf;
 
-    @Column(name = "vice")
-    @Size(max = 45)
+    @Column(name = "temVice" , nullable = false)
     @NotBlank
-    private String vice;
+    private boolean temVice;
+
+    @Column(name = "viceCandidato")
+    @Size(max = 40)
+    @NotBlank
+    private String viceCandidato;
+
+    @Column(name = "sigla")
+    @Size(max = 4)
+    @NotBlank
+    @JoinColumn(name = "partidos")
+    private String sigla;
+
 }

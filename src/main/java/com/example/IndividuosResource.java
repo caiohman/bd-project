@@ -32,4 +32,8 @@ public class IndividuosResource {
     public Individuos createIndividuos(Individuos individuos) {
         return individuosServiceImp.save(individuos);
     }
+
+    @DELETE
+    @Transactional
+    public void deleteIndividuos(Individuos individuos) { individuosServiceImp.delete(individuos);}
 }

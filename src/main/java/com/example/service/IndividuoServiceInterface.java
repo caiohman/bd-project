@@ -11,4 +11,6 @@ public interface IndividuoServiceInterface {
 
     Individuos save(Individuos individuos);
 
+    void delete(Individuos individuos);
+
 }

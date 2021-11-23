@@ -10,4 +10,6 @@ public interface PartidosServiceInterface {
 
     Partidos save(Partidos partidos);
 
+    void delete(Partidos partidos);
+
 }

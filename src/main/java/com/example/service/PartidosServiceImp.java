@@ -30,5 +30,11 @@ public class PartidosServiceImp implements PartidosServiceInterface{
         return partidos;
     }
 
+    @Transactional
+    @Override
+    public void delete(Partidos partidos) {
+        partidosRepository.delete(partidos);
+    }
+
 
 }

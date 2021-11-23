@@ -31,4 +31,9 @@ public class CandidatosResources {
     public Candidatos createCandidatos(Candidatos candidatos) {
         return candidatosServiceImp.save(candidatos);
     }
+
+    @DELETE
+    @Transactional
+    public void deleteCandidatos(Candidatos candidatos) { candidatosServiceImp.delete(candidatos); }
+
 }

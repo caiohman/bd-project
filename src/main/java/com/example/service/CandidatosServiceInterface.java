@@ -8,4 +8,6 @@ public interface CandidatosServiceInterface {
     List<Candidatos> listAll();
 
     Candidatos save(Candidatos candidatos);
+
+    void delete(Candidatos candidatos);
 }

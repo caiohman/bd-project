@@ -28,4 +28,12 @@ public class CandidatosServiceImp implements CandidatosServiceInterface{
         this.candidatosRepository.persist(candidatos);
         return candidatos;
     }
+
+    @Transactional
+    @Override
+    public void delete(Candidatos candidatos) {
+        candidatosRepository.delete(candidatos);
+    }
+
+
 }

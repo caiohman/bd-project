@@ -14,12 +14,12 @@ public class Partidos {
     private String sigla;
 
     @Column(name = "nome")
-    @Size(max = 45)
+    @Size(max = 40)
     @NotBlank
     private String nome;
 
-    @Column(name = "programa")
-    @Size(max = 45)
+    @Column(name = "Programa")
+    @Size(max = 150)
     @NotBlank
     private String programa;
 }

@@ -29,4 +29,12 @@ public class IndividuosServiceImp implements IndividuoServiceInterface{
         this.individuosRepository.persist(individuos);
         return individuos;
     }
+
+    @Transactional
+    @Override
+    public void delete(Individuos individuos) {
+        individuosRepository.delete(individuos);
+    }
+
+
 }
