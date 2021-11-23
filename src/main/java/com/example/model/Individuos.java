@@ -15,8 +15,7 @@ import java.time.LocalDate;
 @Table(name = "individuos")
 public class Individuos {
     @Id
-    @Size(max = 14)
-    private String cpf;
+    private long cpf;
 
     @Column(name = "nome" , nullable = false)
     @Size(max = 40)

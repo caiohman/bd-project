@@ -11,4 +11,6 @@ public interface CandidaturasServiceInterface {
     Candidaturas save(Candidaturas candidaturas);
 
     void delete(Candidaturas candidaturas);
+
+    Candidaturas findById(long idcandidatura);
 }

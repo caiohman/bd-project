@@ -36,5 +36,10 @@ public class IndividuosServiceImp implements IndividuoServiceInterface{
         individuosRepository.delete(individuos);
     }
 
+    @Override
+    public Individuos findById(Long cpf) {
+        return individuosRepository.findById(cpf);
+    }
+
 
 }

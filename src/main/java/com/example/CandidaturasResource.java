@@ -35,7 +35,15 @@ public class CandidaturasResource {
 
     @DELETE
     @Transactional
-    public void deleteCandidaturas(Candidaturas candidaturas) {
-        candidaturasService.delete(candidaturas);
+    @Path("/{idcandidatura}")
+    public void deleteCandidaturas(@PathParam("idcandidatura") Long idcandidatura) {
+        Candidaturas entity = candidaturasService.findById(idcandidatura);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            candidaturasService.delete(entity);
+        }
     }
 }

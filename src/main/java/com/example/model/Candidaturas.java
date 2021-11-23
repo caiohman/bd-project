@@ -18,9 +18,8 @@ public class Candidaturas {
     private long idcandidaturas;
 
     @Column(name = "cpf" , nullable = false)
-    @Size(max = 14)
     @NotBlank
-    private String cpf;
+    private long cpf;
 
     @Column(name = "idCargo" , nullable = false)
     @NotBlank

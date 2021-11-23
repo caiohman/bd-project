@@ -10,4 +10,6 @@ public interface CandidatosServiceInterface {
     Candidatos save(Candidatos candidatos);
 
     void delete(Candidatos candidatos);
+
+    Candidatos findById(Long cpf);
 }

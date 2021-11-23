@@ -33,7 +33,15 @@ public class DoadoresResource {
 
     @DELETE
     @Transactional
-    public void deleteDoadores(Doadores doadores) {
-        doadoresService.delete(doadores);
+    @Path("/{cpf}")
+    public void deleteDoadores(@PathParam("cpf") Long cpf) {
+        Doadores entity = doadoresService.findById(cpf);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            doadoresService.delete(entity);
+        }
     }
 }

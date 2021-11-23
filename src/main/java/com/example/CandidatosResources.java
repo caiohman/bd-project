@@ -34,6 +34,16 @@ public class CandidatosResources {
 
     @DELETE
     @Transactional
-    public void deleteCandidatos(Candidatos candidatos) { candidatosServiceImp.delete(candidatos); }
+    @Path("/{cpf}")
+    public void deleteCandidatos(@PathParam("cpf") Long cpf) {
+        Candidatos entity = candidatosServiceImp.findById(cpf);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            candidatosServiceImp.delete(entity);
+        }
+    }
 
 }

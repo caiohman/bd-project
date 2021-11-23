@@ -29,9 +29,14 @@ public class CargosResource {
 
     @DELETE
     @Transactional
-    @Path("/{id}")
-    public void deleteCargos(Cargos cargos) {
-
-        cargosService.delete(cargos);
+    @Path("/{idCargo}")
+    public void deleteCargos(@PathParam("idCargo") Long idCargo) {
+        Cargos entity = cargosService.findById(idCargo);
+        if (entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            cargosService.delete(entity);
+        }
     }
 }

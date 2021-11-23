@@ -10,4 +10,6 @@ public interface DoadoresServiceInterface {
     Doadores save(Doadores doadores);
 
     void delete(Doadores doadores);
+
+    Doadores findById(long cpf);
 }

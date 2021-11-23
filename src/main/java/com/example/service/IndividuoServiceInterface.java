@@ -13,4 +13,6 @@ public interface IndividuoServiceInterface {
 
     void delete(Individuos individuos);
 
+    Individuos findById(Long cpf);
+
 }

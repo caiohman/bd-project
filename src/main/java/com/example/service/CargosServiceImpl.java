@@ -35,4 +35,9 @@ public class CargosServiceImpl implements  CargosServiceInterface{
     public void delete(Cargos cargos) {
         cargosRepository.delete(cargos);
     }
+
+    @Override
+    public Cargos findById(long idCargo) {
+        return cargosRepository.findById(idCargo);
+    }
 }

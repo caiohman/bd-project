@@ -35,4 +35,9 @@ public class DoadoresServiceImpl implements DoadoresServiceInterface{
     public void delete(Doadores doadores) {
         doadoresRepository.delete(doadores);
     }
+
+    @Override
+    public Doadores findById(long cpf) {
+        return doadoresRepository.findById(cpf);
+    }
 }

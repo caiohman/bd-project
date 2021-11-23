@@ -35,4 +35,11 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
     public void delete(Candidaturas candidaturas) {
         candidaturasRepository.delete(candidaturas);
     }
+
+    @Override
+    public Candidaturas findById(long idcandidatura) {
+        return candidaturasRepository.findById(idcandidatura);
+    }
+
+
 }

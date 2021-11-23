@@ -11,4 +11,6 @@ public interface CargosServiceInterface {
     Cargos save(Cargos cargos);
 
     void delete(Cargos cargos);
+
+    Cargos findById(long idCargo);
 }

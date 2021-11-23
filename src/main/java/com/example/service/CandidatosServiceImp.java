@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.model.Candidatos;
 import com.example.repository.CandidatosRepository;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -33,6 +34,11 @@ public class CandidatosServiceImp implements CandidatosServiceInterface{
     @Override
     public void delete(Candidatos candidatos) {
         candidatosRepository.delete(candidatos);
+    }
+
+    @Override
+    public Candidatos findById(Long cpf) {
+        return candidatosRepository.findById(cpf);
     }
 
 
