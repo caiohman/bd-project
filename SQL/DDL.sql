@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS public.doacaoEmpresa
 	ano SMALLINT NOT NULL,
 	valor FLOAT NOT NULL,
 	
-	CONSTRAINT doacao_empresa_pk PRIMARY KEY(cnpj, idCandidatura, ano, valor),
+	CONSTRAINT doacao_empresa_pk PRIMARY KEY(cnpj, idCandidatura, ano),
 	CONSTRAINT empresa_empresa_fk1 FOREIGN KEY(cnpj) REFERENCES public.empresas(cnpj) ON DELETE CASCADE,
 	CONSTRAINT empresa_empresa_fk2 FOREIGN KEY(idCandidatura) REFERENCES public.candidaturas(idcandidatura) ON DELETE CASCADE
 	
@@ -158,6 +158,7 @@ CREATE TABLE IF NOT EXISTS public.processosJudiciais
 	CONSTRAINT processo_fk FOREIGN KEY(individuo) REFERENCES public.individuos(cpf) ON DELETE CASCADE
 	
 );
+
 
 -------- Triggers
 --- Impede que candidatos ficha suja sejam candidatos
