@@ -41,5 +41,10 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
         return candidaturasRepository.findById(idcandidatura);
     }
 
+    @Override
+    public List<Candidaturas> listBy(Integer ano) {
+        return candidaturasRepository.list("ano" , ano);
+    }
+
 
 }

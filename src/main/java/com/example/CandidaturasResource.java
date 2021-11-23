@@ -46,4 +46,12 @@ public class CandidaturasResource {
             candidaturasService.delete(entity);
         }
     }
+
+    @GET
+    @Path("/{ano}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Candidaturas> listByYear(@PathParam("ano") Integer ano) {
+        return candidaturasService.listBy(ano);
+    }
+
 }

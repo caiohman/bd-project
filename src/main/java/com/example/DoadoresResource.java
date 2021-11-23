@@ -3,6 +3,7 @@ package com.example;
 import com.example.model.Doadores;
 import com.example.service.DoadoresServiceImpl;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,6 +16,7 @@ public class DoadoresResource {
 
     private final DoadoresServiceImpl doadoresService;
 
+    @Inject
     DoadoresResource(DoadoresServiceImpl doadoresService ){
         this.doadoresService = doadoresService;
     }

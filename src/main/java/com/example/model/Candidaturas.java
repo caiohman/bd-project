@@ -15,7 +15,8 @@ import javax.validation.constraints.Size;
 public class Candidaturas {
 
     @Id
-    private long idcandidaturas;
+    @Column(name = "idcandidatura")
+    private long idcandidatura;
 
     @Column(name = "cpf" , nullable = false)
     @NotBlank

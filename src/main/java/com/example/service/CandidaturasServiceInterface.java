@@ -13,4 +13,6 @@ public interface CandidaturasServiceInterface {
     void delete(Candidaturas candidaturas);
 
     Candidaturas findById(long idcandidatura);
+
+    List<Candidaturas> listBy(Integer ano);
 }

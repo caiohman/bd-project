@@ -41,5 +41,4 @@ public class IndividuosServiceImp implements IndividuoServiceInterface{
         return individuosRepository.findById(cpf);
     }
 
-
 }
