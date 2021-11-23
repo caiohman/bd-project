@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS public.candidatos
 CREATE TABLE IF NOT EXISTS public.doadores
 (
 	cpf CHAR(14) NOT NULL,
-	fonte_de_renda VARCHAR(30),
+	fonteDeRenda VARCHAR(30),
 	
 	CONSTRAINT doador_pk PRIMARY KEY(cpf),
 	CONSTRAINT doador_fk FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE
@@ -159,7 +159,6 @@ CREATE TABLE IF NOT EXISTS public.processosJudiciais
 	
 );
 
-
 -------- Triggers
 --- Impede que candidatos ficha suja sejam candidatos
 --Tratamento
@@ -229,3 +228,23 @@ CREATE TRIGGER checkParticipantesEquipe
 BEFORE INSERT ON participantesequipe
 FOR EACH ROW EXECUTE PROCEDURE checkParticipantesEquipe();
 ---------------------------------------------------------------------------
+-- Atualiza a ficha de todos os indivíduos
+-- Tratamento
+CREATE OR REPLACE FUNCTION updateFichaLimpa() RETURNS trigger AS $updateFichaLimpa$
+BEGIN
+	UPDATE individuos 
+	SET fichaLimpa = false
+	FROM processosJudiciais P 
+	WHERE(cpf = P.individuo and P.procedente = TRUE AND P.julgado = TRUE AND ((-- Processo Culpado 
+					EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM P.dataTermino) < 5) OR
+				  (	EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM P.dataTermino) = 5 AND 
+					EXTRACT(MONTH FROM CURRENT_DATE) < EXTRACT(MONTH FROM P.dataTermino) AND
+					EXTRACT(DAY FROM CURRENT_DATE) < EXTRACT(DAY FROM P.dataTermino))));
+	RETURN NEW;
+END;
+$updateFichaLimpa$ LANGUAGE plpgsql;
+
+--Definicao do Trigger
+CREATE TRIGGER updateFichaLimpa
+BEFORE INSERT OR UPDATE ON processosJudiciais
+EXECUTE PROCEDURE updateFichaLimpa();
