@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS public.candidatos
 CREATE TABLE IF NOT EXISTS public.doadores
 (
 	cpf CHAR(14) NOT NULL,
-	fonte_de_renda VARCHAR(30),
+	fonteDeRenda VARCHAR(30),
 	
 	CONSTRAINT doador_pk PRIMARY KEY(cpf),
 	CONSTRAINT doador_fk FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE
