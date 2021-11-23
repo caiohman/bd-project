@@ -1,15 +1,16 @@
-INSERT INTO public.individuos VALUES('123.456.789-40', 'Rafael Silva', 'SP', 'São Paulo', '20/11/1995',null, 'CANDIDATO');--
-INSERT INTO public.individuos VALUES('100.200.454-57', 'Fernanda Almeida', 'RJ', 'Petrópolis', '20/10/1950', null, 'CANDIDATO');
+INSERT INTO public.individuos VALUES('123.456.789-40', 'Rafael Silva', 'SP', 'São Paulo', '20/11/1995', TRUE, 'CANDIDATO');
+INSERT INTO public.individuos VALUES('100.200.454-57', 'Fernanda Almeida', 'RJ', 'Petrópolis', '20/10/1950', TRUE, 'CANDIDATO');
 INSERT INTO public.individuos VALUES('481.596.621-25', 'Adalberto Nobre', 'MG', 'Belo Horizonte', '25/05/1980', FALSE, 'CANDIDATO');
 INSERT INTO public.individuos VALUES('447.556.999-50', 'Guilherme Oliveira', 'RS', 'Porto Alegre', '15/12/1945', TRUE, 'CANDIDATO');
-INSERT INTO public.individuos VALUES('697.562.999-50', 'Ariomar Neves', 'SP', 'São Carlos', '10/09/1990', null, 'CANDIDATO');
+INSERT INTO public.individuos VALUES('697.562.999-50', 'Ariomar Neves', 'SP', 'São Carlos', '10/09/1990', TRUE, 'CANDIDATO');
 INSERT INTO public.individuos VALUES('553.595.952-64', 'Monica Oliveira', 'RS', 'Porto Alegre', '15/12/1995', TRUE, 'CANDIDATO');
 INSERT INTO public.individuos VALUES('559.485.486-60', 'Severino Campos', 'SP', 'Sorocaba', '15/12/1995', TRUE, 'EQUIPE');
-INSERT INTO public.individuos VALUES('448.558.694-54', 'Arthur Nogueira', 'BA', 'Salvador', '04/03/2000', null, 'EQUIPE');
-INSERT INTO public.individuos VALUES('431.551.654-57', 'Reinaldo Lopes', 'BA', 'Salvador', '04/03/1983', null, 'EQUIPE');
+INSERT INTO public.individuos VALUES('448.558.694-54', 'Arthur Nogueira', 'BA', 'Salvador', '04/03/2000', TRUE, 'EQUIPE');
+INSERT INTO public.individuos VALUES('431.551.654-57', 'Reinaldo Lopes', 'BA', 'Salvador', '04/03/1983', TRUE, 'EQUIPE');
 INSERT INTO public.individuos VALUES('548.639.485-61', 'Eduardo Gomes', 'SP', 'São Paulo', '06/03/1983', TRUE, 'DOADOR');
-INSERT INTO public.individuos VALUES('785.483.145-91', 'Norberto Silva', 'SP', 'São Paulo', '06/07/1993', null, 'DOADOR');
-INSERT INTO public.individuos VALUES('695.785.145-52', 'Elenir Neves', 'RJ', 'Rio de Janeiro', '06/03/1975', null, 'DOADOR');
+INSERT INTO public.individuos VALUES('785.483.145-91', 'Norberto Silva', 'SP', 'São Paulo', '06/07/1993', TRUE, 'DOADOR');
+INSERT INTO public.individuos VALUES('695.785.145-52', 'Elenir Neves', 'RJ', 'Rio de Janeiro', '06/03/1975', TRUE, 'DOADOR');
+
 
 
 INSERT INTO public.partidos VALUES('PSOL', 'Partido Socialimos e Liberdade', 'Sociedade igualitária, combater desigualdades...' );
@@ -19,7 +20,6 @@ INSERT INTO public.partidos VALUES('PT', 'Partido Dos Trabalhadores', 'O Partido
 
 INSERT INTO public.candidatos VALUES('123.456.789-40', TRUE, 'Fernando Silva', 'PSOL');
 INSERT INTO public.candidatos VALUES('100.200.454-57', FALSE, null, 'PDT');
-INSERT INTO public.candidatos VALUES('481.596.621-25', FALSE, null, 'NOVO');
 INSERT INTO public.candidatos VALUES('447.556.999-50', TRUE, 'Ronaldo Costa', 'NOVO');
 INSERT INTO public.candidatos VALUES('697.562.999-50', FALSE, null, 'PT');
 INSERT INTO public.candidatos VALUES('553.595.952-64', TRUE, 'Edson Silva', 'PDT');
@@ -31,7 +31,7 @@ INSERT INTO public.cargos VALUES(4, 'PRESIDENCIA DA REPUBLICA', 'FEDERACAO', 'BR
 
 INSERT INTO public.candidaturas VALUES(1, '123.456.789-40', 1, 2018, 50);
 INSERT INTO public.candidaturas VALUES(2, '100.200.454-57', 2, 2020, 10000);
-INSERT INTO public.candidaturas VALUES(3, '481.596.621-25', 3, 2018, 5000);
+INSERT INTO public.candidaturas VALUES(3, '447.556.999-50', 3, 2018, 5000);
 
 INSERT INTO public.equipeApoio VALUES(1, 'Equipe Rafael Silva', 1);
 INSERT INTO public.equipeApoio VALUES(2, 'Equipe Fernanda Almeida', 2);
@@ -57,3 +57,4 @@ INSERT INTO public.processosjudiciais VALUES(1, TRUE, FALSE, null, '123.456.789-
 INSERT INTO public.processosjudiciais VALUES(2, false, TRUE, '20/11/2015', '100.200.454-57');
 INSERT INTO public.processosjudiciais VALUES(3, FALSE, FALSE, null, '481.596.621-25');
 
+--INSERT INTO public.candidatos VALUES('481.596.621-25', TRUE, 'Fernando Silva', 'PSOL');
