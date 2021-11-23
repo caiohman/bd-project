@@ -1,21 +1,24 @@
 package com.example.service;
 
 import com.example.model.Candidatos;
+import com.example.model.Individuos;
 import com.example.repository.CandidatosRepository;
-import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
 public class CandidatosServiceImp implements CandidatosServiceInterface{
-    private CandidatosRepository candidatosRepository;
+    private final CandidatosRepository candidatosRepository;
+    private final IndividuosServiceImp individuosServiceImp;
 
     @Inject
-    CandidatosServiceImp(CandidatosRepository candidatosRepository) {
+    CandidatosServiceImp(CandidatosRepository candidatosRepository, IndividuosServiceImp individuosServiceImp) {
         this.candidatosRepository = candidatosRepository;
+        this.individuosServiceImp = individuosServiceImp;
     }
 
     @Override
@@ -39,6 +42,18 @@ public class CandidatosServiceImp implements CandidatosServiceInterface{
     @Override
     public Candidatos findById(Long cpf) {
         return candidatosRepository.findById(cpf);
+    }
+
+    @Override
+    public List<Candidatos> listByRecord(boolean record) {
+       List<Individuos> individuos = individuosServiceImp.listByRecord(record);
+       ArrayList<Candidatos> candidatos = new ArrayList<>();
+
+        for (Individuos individuo : individuos) {
+            candidatos.add(candidatosRepository.findById(individuo.getCpf()));
+        }
+
+       return  candidatos;
     }
 
 

@@ -46,4 +46,12 @@ public class CandidatosResources {
         }
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/fichalimpa")
+    public List<Candidatos> listByRecord() {
+        return  candidatosServiceImp.listByRecord(true);
+    }
+
+
 }

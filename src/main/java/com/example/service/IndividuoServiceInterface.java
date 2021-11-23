@@ -17,4 +17,6 @@ public interface IndividuoServiceInterface {
 
     Individuos findByName(String name);
 
+    List<Individuos> listByRecord(boolean record);
+
 }

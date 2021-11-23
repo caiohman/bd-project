@@ -46,4 +46,9 @@ public class IndividuosServiceImp implements IndividuoServiceInterface{
         return individuosRepository.find("nome" , name).firstResult();
     }
 
+    @Override
+    public List<Individuos> listByRecord(boolean record) {
+        return individuosRepository.list("fichaLimpa" , record);
+    }
+
 }

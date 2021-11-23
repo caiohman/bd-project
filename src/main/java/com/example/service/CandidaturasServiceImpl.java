@@ -60,5 +60,4 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
        return candidaturasRepository.list("cpf" , individuos.getCpf());
     }
 
-
 }

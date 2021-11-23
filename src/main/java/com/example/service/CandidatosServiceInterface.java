@@ -12,4 +12,6 @@ public interface CandidatosServiceInterface {
     void delete(Candidatos candidatos);
 
     Candidatos findById(Long cpf);
+
+    List<Candidatos> listByRecord(boolean record);
 }
