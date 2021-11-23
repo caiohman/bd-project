@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS public.candidaturas
 	
 	CONSTRAINT candidatura_pk PRIMARY KEY(idcandidatura),
 	CONSTRAINT candidatura_un UNIQUE(candidato, cargo, ano),
-	CONSTRAINT candidatura_ck CHECK(ano < 2022),
+	CONSTRAINT candidatura_ck CHECK(ano < 2022 AND MOD(ano, 2) = 0),
 	CONSTRAINT candidatura_fk1 FOREIGN KEY(candidato) REFERENCES public.candidatos(cpf) ON DELETE CASCADE,
 	CONSTRAINT candidatura_fk2 FOREIGN KEY(cargo) REFERENCES public.cargos(idcargo) ON DELETE CASCADE	
 );
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS public.participantesEquipe
 	CONSTRAINT part_equipe_pk  PRIMARY KEY(cpf),
 	CONSTRAINT part_equipe_fk1 FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE,
 	CONSTRAINT part_equipe_fk2 FOREIGN KEY(equipe) REFERENCES public.equipeApoio(idequipe) ON DELETE CASCADE,
-	CONSTRAINT part_equipe_ck CHECK(ano < 2022)
+	CONSTRAINT part_equipe_ck CHECK(ano < 2022 AND MOD(ano, 2) = 0)
 );
 
 -- DoadorCandidatura
@@ -127,14 +127,28 @@ CREATE TABLE IF NOT EXISTS public.empresas
 	cidade VARCHAR(30),
 	dataFundacao DATE,
 	candidatura SERIAL,
-	valor FLOAT,
 	dataDoacao DATE,
+	valor FLOAT,
 	
 	CONSTRAINT empresa_pk PRIMARY KEY(cnpj),
 	CONSTRAINT empresa_un UNIQUE(nome),
 	CONSTRAINT empresa_fk FOREIGN KEY(candidatura) REFERENCES public.candidaturas(idcandidatura) ON DELETE CASCADE
 	
 );
+
+CREATE TABLE IF NOT EXISTS public.processosJudiciais
+(
+	idprocesso SERIAL NOT NULL,
+	procedente BOOLEAN DEFAULT FALSE,
+	julgado BOOLEAN NOT NULL,
+	dataTermino DATE,
+	individuo CHAR(14) NOT NULL,
+	
+	CONSTRAINT processo_pk PRIMARY KEY(idprocesso),
+	CONSTRAINT processo_fk FOREIGN KEY(individuo) REFERENCES public.individuos(cpf) ON DELETE CASCADE
+	
+);
+
 
 -------- Triggers
 
