@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS public.doacaoIndividuo
 	dataDoacao DATE NOT NULL,
 	valor FLOAT NOT NULL,
 	
-	CONSTRAINT doador_candidatura_pk  PRIMARY KEY(doador, candidatura),
+	CONSTRAINT doador_candidatura_pk  PRIMARY KEY(doador, candidatura, dataDocao, valor),
 	CONSTRAINT doador_candidatura_fk1 FOREIGN KEY(doador) REFERENCES public.doadores(cpf) ON DELETE CASCADE,
 	CONSTRAINT daodor_candidatura_fk2 FOREIGN KEY (candidatura) REFERENCES public.candidaturas(idcandidatura) ON DELETE CASCADE
 );
