@@ -30,6 +30,7 @@ INSERT INTO public.cargos VALUES(4, 'PRESIDENCIA DA REPUBLICA', 'FEDERACAO', 'BR
 INSERT INTO public.candidaturas VALUES(1, '123.456.789-40', 1, 2018, 50);
 INSERT INTO public.candidaturas VALUES(2, '100.200.454-57', 2, 2020, 10000);
 INSERT INTO public.candidaturas VALUES(3, '447.556.999-50', 3, 2018, 5000);
+INSERT INTO public.candidaturas VALUES(4, '697.562.999-50', 3, 2018, 6500);
 
 INSERT INTO public.equipeApoio VALUES(1, 'Equipe Rafael Silva', 1);
 INSERT INTO public.equipeApoio VALUES(2, 'Equipe Fernanda Almeida', 2);
@@ -59,7 +60,12 @@ INSERT INTO public.processosjudiciais VALUES(1, TRUE, FALSE, null, '123.456.789-
 INSERT INTO public.processosjudiciais VALUES(2, false, TRUE, '20/11/2015', '100.200.454-57');
 INSERT INTO public.processosjudiciais VALUES(3, FALSE, FALSE, null, '481.596.621-25');
 
+
+
 --test trigger 1 INSERT INTO public.candidatos VALUES('481.596.621-25', TRUE, 'Fernando Silva', 'PSOL');
 --test trigger 2 INSERT INTO public.candidatos VALUES('548.639.485-61', TRUE, 'Fernando Silva', 'PSOL');
 --test trigger 3 INSERT INTO public.doadores VALUES('481.596.621-25', 'Fundo de Investimentos');
 --test trigger 4 INSERT INTO public.participantesEquipe VALUES('481.596.621-25', 2018, 1);
+--test trigger 5 INSERT INTO public.processosjudiciais VALUES(4, TRUE, TRUE, '22/11/2020', '559.485.486-60')
+--INSERT INTO public.doacaoEmpresa VALUES('18.565.583/4921-19', 3, 2019, 5000);
+
