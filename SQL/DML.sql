@@ -7,6 +7,10 @@ INSERT INTO public.individuos VALUES('553.595.952-64', 'Monica Oliveira', 'RS', 
 INSERT INTO public.individuos VALUES('559.485.486-60', 'Severino Campos', 'SP', 'Sorocaba', '15/12/1995', TRUE, 'EQUIPE');
 INSERT INTO public.individuos VALUES('448.558.694-54', 'Arthur Nogueira', 'BA', 'Salvador', '04/03/2000', null, 'EQUIPE');
 INSERT INTO public.individuos VALUES('431.551.654-57', 'Reinaldo Lopes', 'BA', 'Salvador', '04/03/1983', null, 'EQUIPE');
+INSERT INTO public.individuos VALUES('548.639.485-61', 'Eduardo Gomes', 'SP', 'São Paulo', '06/03/1983', TRUE, 'DOADOR');
+INSERT INTO public.individuos VALUES('785.483.145-91', 'Norberto Silva', 'SP', 'São Paulo', '06/07/1993', null, 'DOADOR');
+INSERT INTO public.individuos VALUES('695.785.145-52', 'Elenir Neves', 'RJ', 'Rio de Janeiro', '06/03/1975', null, 'DOADOR');
+
 
 INSERT INTO public.partidos VALUES('PSOL', 'Partido Socialimos e Liberdade', 'Sociedade igualitária, combater desigualdades...' );
 INSERT INTO public.partidos VALUES('PDT', 'Partido Democrático Trabalhista', 'Alinhado às ideologias trabalhista, socialista democrática e social-democrata.' );
@@ -20,19 +24,36 @@ INSERT INTO public.candidatos VALUES('447.556.999-50', TRUE, 'Ronaldo Costa', 'N
 INSERT INTO public.candidatos VALUES('697.562.999-50', FALSE, null, 'PT');
 INSERT INTO public.candidatos VALUES('553.595.952-64', TRUE, 'Edson Silva', 'PDT');
 
---INSERT INTO public.equipe_apoio VALUES(1, 'Equipe Rafael Silva');
---INSERT INTO public.equipe_apoio VALUES(2, 'Equipe Fernanda Almeida');
---INSERT INTO public.equipe_apoio VALUES(3, 'Equipe Adalberto Nobre');
-
---INSERT INTO public.participantes_equipe VALUES('559.485.486-60', 2018, 1);
---INSERT INTO public.participantes_equipe VALUES('448.558.694-54', 2018, 1);
---INSERT INTO public.participantes_equipe VALUES('431.551.654-57', 2016, 2);
-
 INSERT INTO public.cargos VALUES(1, 'DEPUTADO - SP', 'ESTADO', 'SP', 94);
 INSERT INTO public.cargos VALUES(2, 'PREFEITURA - PETROPOLIS', 'CIDADE', 'Petropolis', 1);
 INSERT INTO public.cargos VALUES(3, 'DEPUTADO - MG', 'ESTADO', 'MG', 77);
 INSERT INTO public.cargos VALUES(4, 'PRESIDENCIA DA REPUBLICA', 'FEDERACAO', 'BRASIL', 1);
 
-INSERT INTO public.candidaturas VALUES(1, '123.456.789-40', 1, 2018)
+INSERT INTO public.candidaturas VALUES(1, '123.456.789-40', 1, 2018, 50);
+INSERT INTO public.candidaturas VALUES(2, '100.200.454-57', 2, 2020, 10000);
+INSERT INTO public.candidaturas VALUES(3, '481.596.621-25', 3, 2018, 5000);
 
+INSERT INTO public.equipeApoio VALUES(1, 'Equipe Rafael Silva', 1);
+INSERT INTO public.equipeApoio VALUES(2, 'Equipe Fernanda Almeida', 2);
+INSERT INTO public.equipeApoio VALUES(3, 'Equipe Adalberto Nobre', 3);
+
+INSERT INTO public.participantesEquipe VALUES('559.485.486-60', 2018, 1);
+INSERT INTO public.participantesEquipe VALUES('448.558.694-54', 2018, 1);
+INSERT INTO public.participantesEquipe VALUES('431.551.654-57', 2016, 2);
+
+INSERT INTO public.doadores VALUES('548.639.485-61', 'Fundo de Investimentos');
+INSERT INTO public.doadores VALUES('785.483.145-91', 'CEO');
+INSERT INTO public.doadores VALUES('695.785.145-52', 'Juiz');
+
+INSERT INTO public.doadorCandidatura VALUES('548.639.485-61', 1, '08/11/2018', 300.05);
+INSERT INTO public.doadorCandidatura VALUES('785.483.145-91', 2, '06/07/2020', 1000);
+INSERT INTO public.doadorCandidatura VALUES('695.785.145-52', 3, '20/11/2018', 1986.50);
+
+INSERT INTO public.empresas VALUES('19.100.123/0001-10', 'Jau Supermercados', 'SP', 'São Paulo', '15/07/1995', 1, '10/05/2018', 50000); 
+INSERT INTO public.empresas VALUES('15.195.423/1411-09', 'Óticas Carol', 'RJ', 'Petropolis', '15/07/1998', 3, '10/05/2020', 50000);
+INSERT INTO public.empresas VALUES('18.565.583/4921-19', 'Renner', 'MG', 'Belo Horizonte', '15/07/1980', 2, '10/05/2018', 50000);
+
+INSERT INTO public.processosjudiciais VALUES(1, TRUE, FALSE, null, '123.456.789-40');
+INSERT INTO public.processosjudiciais VALUES(2, false, TRUE, '20/11/2015', '100.200.454-57');
+INSERT INTO public.processosjudiciais VALUES(3, FALSE, FALSE, null, '481.596.621-25');
 
