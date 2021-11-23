@@ -43,13 +43,17 @@ INSERT INTO public.doadores VALUES('548.639.485-61', 'Fundo de Investimentos');
 INSERT INTO public.doadores VALUES('785.483.145-91', 'CEO');
 INSERT INTO public.doadores VALUES('695.785.145-52', 'Juiz');
 
-INSERT INTO public.doadorCandidatura VALUES('548.639.485-61', 1, '08/11/2018', 300.05);
-INSERT INTO public.doadorCandidatura VALUES('785.483.145-91', 2, '06/07/2020', 1000);
-INSERT INTO public.doadorCandidatura VALUES('695.785.145-52', 3, '20/11/2018', 1986.50);
+INSERT INTO public.doacaoIndividuo VALUES('548.639.485-61', 1, '08/11/2018', 300.05);
+INSERT INTO public.doacaoIndividuo VALUES('785.483.145-91', 2, '06/07/2020', 1000);
+INSERT INTO public.doacaoIndividuo VALUES('695.785.145-52', 3, '20/11/2018', 1986.50);
 
-INSERT INTO public.empresas VALUES('19.100.123/0001-10', 'Jau Supermercados', 'SP', 'São Paulo', '15/07/1995', 1, '10/05/2018', 50000); 
-INSERT INTO public.empresas VALUES('15.195.423/1411-09', 'Óticas Carol', 'RJ', 'Petropolis', '15/07/1998', 3, '10/05/2020', 50000);
-INSERT INTO public.empresas VALUES('18.565.583/4921-19', 'Renner', 'MG', 'Belo Horizonte', '15/07/1980', 2, '10/05/2018', 50000);
+INSERT INTO public.empresas VALUES('19.100.123/0001-10', 'Jau Supermercados', 'SP', 'São Paulo', '15/07/1995'); 
+INSERT INTO public.empresas VALUES('15.195.423/1411-09', 'Óticas Carol', 'RJ', 'Petropolis', '15/07/1998');
+INSERT INTO public.empresas VALUES('18.565.583/4921-19', 'Renner', 'MG', 'Belo Horizonte', '15/07/1980');
+
+INSERT INTO public.doacaoEmpresa VALUES('19.100.123/0001-10', 1, 2018, 50000); 
+INSERT INTO public.doacaoEmpresa VALUES('15.195.423/1411-09', 3, 2020, 50000);
+INSERT INTO public.doacaoEmpresa VALUES('18.565.583/4921-19', 2, 2018, 50000);
 
 INSERT INTO public.processosjudiciais VALUES(1, TRUE, FALSE, null, '123.456.789-40');
 INSERT INTO public.processosjudiciais VALUES(2, false, TRUE, '20/11/2015', '100.200.454-57');
