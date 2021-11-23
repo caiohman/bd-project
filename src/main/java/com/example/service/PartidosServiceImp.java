@@ -36,5 +36,10 @@ public class PartidosServiceImp implements PartidosServiceInterface{
         partidosRepository.delete(partidos);
     }
 
+    @Override
+    public Partidos findByName(String sigla) {
+        return partidosRepository.find("sigla" , sigla).firstResult();
+    }
+
 
 }

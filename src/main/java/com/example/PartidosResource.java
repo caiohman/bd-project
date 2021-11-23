@@ -12,12 +12,12 @@ import java.util.List;
 @Path("/partidos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ExampleResource {
+public class PartidosResource {
 
     private final PartidosServiceImp partidosServiceImp;
 
     @Inject
-    ExampleResource(PartidosServiceImp partidosServiceImp ) {
+    PartidosResource(PartidosServiceImp partidosServiceImp ) {
         this.partidosServiceImp = partidosServiceImp;
     }
 
@@ -35,6 +35,16 @@ public class ExampleResource {
 
     @DELETE
     @Transactional
-    public void deletePartidos(Partidos partidos) { partidosServiceImp.delete(partidos); }
+    @Path("/{nome}")
+    public void deletePartidos(@PathParam("nome") String nome) {
+        Partidos entity = partidosServiceImp.findByName(nome);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            partidosServiceImp.delete(entity);
+        }
+    }
 
 }

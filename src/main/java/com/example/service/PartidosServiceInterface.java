@@ -12,4 +12,6 @@ public interface PartidosServiceInterface {
 
     void delete(Partidos partidos);
 
+    Partidos findByName(String sigla);
+
 }
