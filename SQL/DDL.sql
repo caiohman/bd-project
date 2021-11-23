@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS public.participantesEquipe
 	CONSTRAINT part_equipe_ck CHECK(ano < 2022 AND MOD(ano, 2) = 0)
 );
 
--- DoadorCandidatura
-CREATE TABLE IF NOT EXISTS public.doadorCandidatura
+-- Doação Indivíduo
+CREATE TABLE IF NOT EXISTS public.doacaoIndividuo
 (
 	doador CHAR(14) NOT NULL,
 	candidatura SERIAL NOT NULL,
@@ -126,16 +126,26 @@ CREATE TABLE IF NOT EXISTS public.empresas
 	estado CHAR(2),
 	cidade VARCHAR(30),
 	dataFundacao DATE,
-	candidatura SERIAL,
-	dataDoacao DATE,
-	valor FLOAT,
 	
 	CONSTRAINT empresa_pk PRIMARY KEY(cnpj),
-	CONSTRAINT empresa_un UNIQUE(nome),
-	CONSTRAINT empresa_fk FOREIGN KEY(candidatura) REFERENCES public.candidaturas(idcandidatura) ON DELETE CASCADE
+	CONSTRAINT empresa_un UNIQUE(nome)	
+);
+
+--DOACAOEMPRESA
+CREATE TABLE IF NOT EXISTS public.doacaoEmpresa
+(
+	cnpj CHAR(20) NOT NULL,
+	idCandidatura SERIAL NOT NULL,
+	ano SMALLINT NOT NULL,
+	valor FLOAT NOT NULL,
+	
+	CONSTRAINT doacao_empresa_pk PRIMARY KEY(cnpj, idCandidatura, ano, valor),
+	CONSTRAINT empresa_empresa_fk1 FOREIGN KEY(cnpj) REFERENCES public.empresas(cnpj) ON DELETE CASCADE,
+	CONSTRAINT empresa_empresa_fk2 FOREIGN KEY(idCandidatura) REFERENCES public.candidaturas(idcandidatura) ON DELETE CASCADE
 	
 );
 
+-- PROCESSOS JUDICIAIS
 CREATE TABLE IF NOT EXISTS public.processosJudiciais
 (
 	idprocesso SERIAL NOT NULL,
@@ -148,7 +158,6 @@ CREATE TABLE IF NOT EXISTS public.processosJudiciais
 	CONSTRAINT processo_fk FOREIGN KEY(individuo) REFERENCES public.individuos(cpf) ON DELETE CASCADE
 	
 );
-
 
 -------- Triggers
 --- Impede que candidatos ficha suja sejam candidatos
