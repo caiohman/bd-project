@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS public.candidatos
 	cpf CHAR(14) NOT NULL,
 	temVice BOOLEAN NOT NULL,
 	viceCandidato VARCHAR(40) DEFAULT '-',
-	partido VARCHAR(4),
+	sigla VARCHAR(4),
 	
 	CONSTRAINT candidato_pk  PRIMARY KEY(cpf),
 	CONSTRAINT candidato_fk1 FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE,
-	CONSTRAINT candidato_fk2 FOREIGN KEY(partido) REFERENCES public.partidos(sigla) ON DELETE CASCADE
+	CONSTRAINT candidato_fk2 FOREIGN KEY(sigla) REFERENCES public.partidos(sigla) ON DELETE CASCADE
 );
 
 -- DOADORES DE CAMPANHA
