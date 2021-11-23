@@ -40,4 +40,9 @@ public class CargosServiceImpl implements  CargosServiceInterface{
     public Cargos findById(long idCargo) {
         return cargosRepository.findById(idCargo);
     }
+
+    @Override
+    public List<Cargos> listByName(String name) {
+        return cargosRepository.list("nome" , name);
+    }
 }

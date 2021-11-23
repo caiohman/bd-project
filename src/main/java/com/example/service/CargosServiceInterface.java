@@ -13,4 +13,6 @@ public interface CargosServiceInterface {
     void delete(Cargos cargos);
 
     Cargos findById(long idCargo);
+
+    List<Cargos> listByName(String name);
 }

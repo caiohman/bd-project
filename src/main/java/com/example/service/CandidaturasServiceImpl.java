@@ -1,12 +1,15 @@
 package com.example.service;
 
 import com.example.model.Candidaturas;
+import com.example.model.Cargos;
 import com.example.model.Individuos;
 import com.example.repository.CandidaturasRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
@@ -14,12 +17,14 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
 
     private final CandidaturasRepository candidaturasRepository;
     private final IndividuosServiceImp individuosServiceImp;
+    private final CargosServiceImpl cargosService;
 
     @Inject
-    CandidaturasServiceImpl(CandidaturasRepository candidaturasRepository, IndividuosServiceImp individuosServiceImp) {
+    CandidaturasServiceImpl(CandidaturasRepository candidaturasRepository, IndividuosServiceImp individuosServiceImp ,
+                            CargosServiceImpl cargosService) {
         this.candidaturasRepository = candidaturasRepository;
         this.individuosServiceImp = individuosServiceImp;
-
+        this.cargosService = cargosService;
     }
 
     @Override
@@ -55,9 +60,21 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
         Individuos individuos = individuosServiceImp.findByName(name);
 
         if (individuos == null ) {
-            System.out.println("Nada aqui");
+            throw new NotFoundException();
         }
        return candidaturasRepository.list("cpf" , individuos.getCpf());
+    }
+
+    @Override
+    public List<Candidaturas> listByJobPosition(String job) {
+        List<Cargos> cargos = cargosService.listByName(job);
+        ArrayList<Candidaturas> candidaturas = new ArrayList<>();
+
+        for(Cargos cargo : cargos) {
+          candidaturas.add(candidaturasRepository.findById(cargo.getIdCargo()));
+        }
+
+        return candidaturas;
     }
 
 }

@@ -61,4 +61,11 @@ public class CandidaturasResource {
         return candidaturasService.listByName(nome);
     }
 
+    @GET
+    @Path("cargo/{cargo}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Candidaturas> listByJobPosition(@PathParam("cargo") String cargo) {
+      return candidaturasService.listByJobPosition(cargo);
+    }
+
 }
