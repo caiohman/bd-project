@@ -167,3 +167,55 @@ $checkFichaLimpa$ LANGUAGE plpgsql;
 CREATE TRIGGER checkFichaLimpa
 BEFORE INSERT ON candidatos
 FOR EACH ROW EXECUTE PROCEDURE checkFichaLimpa();
+---------------------------------------------------------------------------
+-- Garante que um candidado, é um indivíduo de tipo candidato
+--Tratamento
+CREATE OR REPLACE FUNCTION checkCandidato() RETURNS trigger AS $checkCandidato$
+BEGIN 
+	PERFORM * FROM individuos I WHERE (I.cpf = NEW.cpf AND I.tipo != 'CANDIDATO');
+	IF FOUND THEN
+		RAISE EXCEPTION 'Este indivíduo não é um candidato.';
+	END IF;
+	RETURN NEW;
+END;
+$checkCandidato$ LANGUAGE plpgsql;
+
+-- Definicao do Trigger
+CREATE TRIGGER checkCandidato
+BEFORE INSERT ON candidatos
+FOR EACH ROW EXECUTE PROCEDURE checkCandidato();
+---------------------------------------------------------------------------
+-- Garante que um candidado, é um indivíduo de tipo candidato
+--Tratamento
+CREATE OR REPLACE FUNCTION checkDoador() RETURNS trigger AS $checkDoador$
+BEGIN 
+	PERFORM * FROM individuos I WHERE (I.cpf = NEW.cpf AND I.tipo != 'DOADOR');
+	IF FOUND THEN
+		RAISE EXCEPTION 'Este indivíduo não é um doador de campanha.';
+	END IF;
+	RETURN NEW;
+END;
+$checkDoador$ LANGUAGE plpgsql;
+
+-- Definicao do Trigger
+CREATE TRIGGER checkDoador
+BEFORE INSERT ON doadores
+FOR EACH ROW EXECUTE PROCEDURE checkDoador();
+---------------------------------------------------------------------------
+-- Garante que um candidado, é um indivíduo de tipo candidato
+--Tratamento
+CREATE OR REPLACE FUNCTION checkParticipantesEquipe() RETURNS trigger AS $checkParticipantesEquipe$
+BEGIN 
+	PERFORM * FROM individuos I WHERE (I.cpf = NEW.cpf AND I.tipo != 'EQUIPE');
+	IF FOUND THEN
+		RAISE EXCEPTION 'Este indivíduo não é um membro de uma equipe de campanha';
+	END IF;
+	RETURN NEW;
+END;
+$checkParticipantesEquipe$ LANGUAGE plpgsql;
+
+-- Definicao do Trigger
+CREATE TRIGGER checkParticipantesEquipe
+BEFORE INSERT ON participantesequipe
+FOR EACH ROW EXECUTE PROCEDURE checkParticipantesEquipe();
+---------------------------------------------------------------------------
