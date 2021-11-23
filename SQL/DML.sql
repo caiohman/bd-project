@@ -11,8 +11,6 @@ INSERT INTO public.individuos VALUES('548.639.485-61', 'Eduardo Gomes', 'SP', 'S
 INSERT INTO public.individuos VALUES('785.483.145-91', 'Norberto Silva', 'SP', 'São Paulo', '06/07/1993', TRUE, 'DOADOR');
 INSERT INTO public.individuos VALUES('695.785.145-52', 'Elenir Neves', 'RJ', 'Rio de Janeiro', '06/03/1975', TRUE, 'DOADOR');
 
-
-
 INSERT INTO public.partidos VALUES('PSOL', 'Partido Socialimos e Liberdade', 'Sociedade igualitária, combater desigualdades...' );
 INSERT INTO public.partidos VALUES('PDT', 'Partido Democrático Trabalhista', 'Alinhado às ideologias trabalhista, socialista democrática e social-democrata.' );
 INSERT INTO public.partidos VALUES('NOVO', 'Partido Novo', 'O Partido Novo é um partido político brasileiro de direita fundado em 2011 e registrado oficialmente em 2015, similar ao Partido Libertário.' );
@@ -57,4 +55,7 @@ INSERT INTO public.processosjudiciais VALUES(1, TRUE, FALSE, null, '123.456.789-
 INSERT INTO public.processosjudiciais VALUES(2, false, TRUE, '20/11/2015', '100.200.454-57');
 INSERT INTO public.processosjudiciais VALUES(3, FALSE, FALSE, null, '481.596.621-25');
 
---INSERT INTO public.candidatos VALUES('481.596.621-25', TRUE, 'Fernando Silva', 'PSOL');
+--test trigger 1 INSERT INTO public.candidatos VALUES('481.596.621-25', TRUE, 'Fernando Silva', 'PSOL');
+--test trigger 2 INSERT INTO public.candidatos VALUES('548.639.485-61', TRUE, 'Fernando Silva', 'PSOL');
+--test trigger 3 INSERT INTO public.doadores VALUES('481.596.621-25', 'Fundo de Investimentos');
+--test trigger 4 INSERT INTO public.participantesEquipe VALUES('481.596.621-25', 2018, 1);
