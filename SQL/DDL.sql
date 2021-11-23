@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS public.individuos
 	estado CHAR(2),
 	cidade VARCHAR(30),
 	dataNascimento DATE,
-	fichaLimpa BOOLEAN DEFAULT TRUE,
+	fichaLimpa BOOLEAN NOT NULL DEFAULT TRUE,
 	tipo VARCHAR(9),
 	
 	CONSTRAINT individuo_pk PRIMARY KEY(cpf),
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS public.candidatos
 CREATE TABLE IF NOT EXISTS public.doadores
 (
 	cpf CHAR(14) NOT NULL,
-	fonteDeRenda VARCHAR(30),
+	fonte_de_renda VARCHAR(30),
 	
 	CONSTRAINT doador_pk PRIMARY KEY(cpf),
 	CONSTRAINT doador_fk FOREIGN KEY(cpf) REFERENCES public.individuos(cpf) ON DELETE CASCADE
@@ -151,6 +151,19 @@ CREATE TABLE IF NOT EXISTS public.processosJudiciais
 
 
 -------- Triggers
+--- Impede que candidatos ficha suja sejam candidatos
+--Tratamento
+CREATE OR REPLACE FUNCTION checkFichaLimpa() RETURNS trigger AS $checkFichaLimpa$
+BEGIN 
+	PERFORM * FROM individuos I WHERE (I.cpf = NEW.cpf AND (NOT I.fichaLimpa));
+	IF FOUND THEN
+		RAISE EXCEPTION 'Este candidato não pode se candidatar pois não possui ficha limpa.';
+	END IF;
+	RETURN NEW;
+END;
+$checkFichaLimpa$ LANGUAGE plpgsql;
 
-
-
+-- Definicao do Trigger
+CREATE TRIGGER checkFichaLimpa
+BEFORE INSERT ON candidatos
+FOR EACH ROW EXECUTE PROCEDURE checkFichaLimpa();
