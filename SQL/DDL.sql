@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS public.candidaturas
 	candidato CHAR(14) NOT NULL,
 	cargo SERIAL NOT NULL,
 	ano SMALLINT NOT NULL,
-	qtdVotos SMALLINT,
+	qtdVotos INT,
 	
 	CONSTRAINT candidatura_pk PRIMARY KEY(idcandidatura),
 	CONSTRAINT candidatura_un UNIQUE(candidato, cargo, ano),
