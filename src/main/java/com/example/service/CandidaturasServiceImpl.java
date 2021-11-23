@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.model.Candidaturas;
+import com.example.model.Individuos;
 import com.example.repository.CandidaturasRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -12,10 +13,13 @@ import java.util.List;
 public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
 
     private final CandidaturasRepository candidaturasRepository;
+    private final IndividuosServiceImp individuosServiceImp;
 
     @Inject
-    CandidaturasServiceImpl(CandidaturasRepository candidaturasRepository) {
+    CandidaturasServiceImpl(CandidaturasRepository candidaturasRepository, IndividuosServiceImp individuosServiceImp) {
         this.candidaturasRepository = candidaturasRepository;
+        this.individuosServiceImp = individuosServiceImp;
+
     }
 
     @Override
@@ -42,8 +46,18 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
     }
 
     @Override
-    public List<Candidaturas> listBy(Integer ano) {
+    public List<Candidaturas> listByYear(Integer ano) {
         return candidaturasRepository.list("ano" , ano);
+    }
+
+    @Override
+    public List<Candidaturas> listByName(String name) {
+        Individuos individuos = individuosServiceImp.findByName(name);
+
+        if (individuos == null ) {
+            System.out.println("Nada aqui");
+        }
+       return candidaturasRepository.list("cpf" , individuos.getCpf());
     }
 
 

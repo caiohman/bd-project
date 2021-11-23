@@ -15,4 +15,6 @@ public interface IndividuoServiceInterface {
 
     Individuos findById(Long cpf);
 
+    Individuos findByName(String name);
+
 }

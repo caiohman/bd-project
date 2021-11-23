@@ -41,4 +41,9 @@ public class IndividuosServiceImp implements IndividuoServiceInterface{
         return individuosRepository.findById(cpf);
     }
 
+    @Override
+    public Individuos findByName(String name) {
+        return individuosRepository.find("nome" , name).firstResult();
+    }
+
 }

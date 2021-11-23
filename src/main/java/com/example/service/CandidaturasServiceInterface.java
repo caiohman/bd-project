@@ -14,5 +14,7 @@ public interface CandidaturasServiceInterface {
 
     Candidaturas findById(long idcandidatura);
 
-    List<Candidaturas> listBy(Integer ano);
+    List<Candidaturas> listByYear(Integer ano);
+
+    List<Candidaturas> listByName(String name);
 }

@@ -48,10 +48,17 @@ public class CandidaturasResource {
     }
 
     @GET
-    @Path("/{ano}")
+    @Path("ano/{ano}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Candidaturas> listByYear(@PathParam("ano") Integer ano) {
-        return candidaturasService.listBy(ano);
+        return candidaturasService.listByYear(ano);
+    }
+
+    @GET
+    @Path("nome/{nome}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Candidaturas> listByName(@PathParam("nome") String nome) {
+        return candidaturasService.listByName(nome);
     }
 
 }
