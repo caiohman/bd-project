@@ -4,6 +4,7 @@ import com.example.model.Candidaturas;
 import com.example.model.Cargos;
 import com.example.model.Individuos;
 import com.example.repository.CandidaturasRepository;
+import io.quarkus.panache.common.Sort;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -76,5 +77,11 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
 
         return candidaturas;
     }
+
+    @Override
+    public List<Candidaturas> listOrder(String attr) {
+        return candidaturasRepository.list("order by ?1" , attr);
+    }
+
 
 }

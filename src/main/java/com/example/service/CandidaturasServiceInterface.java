@@ -19,4 +19,6 @@ public interface CandidaturasServiceInterface {
     List<Candidaturas> listByName(String name);
 
     List<Candidaturas> listByJobPosition(String job);
+
+    List<Candidaturas> listOrder(String attr);
 }

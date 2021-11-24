@@ -82,5 +82,11 @@ public class CandidaturasResource {
       return candidaturasService.listByJobPosition(cargo);
     }
 
+    @GET
+    @Path("sort/{attr}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Candidaturas> listSort(@PathParam("attr") String attr) {
+        return candidaturasService.listOrder(attr);
+    }
 
 }
