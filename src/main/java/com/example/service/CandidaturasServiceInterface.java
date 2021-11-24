@@ -21,4 +21,5 @@ public interface CandidaturasServiceInterface {
     List<Candidaturas> listByJobPosition(String job);
 
     List<Candidaturas> listOrder(String attr);
+
 }

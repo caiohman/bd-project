@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS public.doacaoEmpresa
     ano SMALLINT NOT NULL,
     valor FLOAT NOT NULL,
 
-    CONSTRAINT doacao_empresa_pk PRIMARY KEY(cnpj, idcandidatura),
+    CONSTRAINT doacao_empresa_pk PRIMARY KEY(cnpj, idcandidatura, ano, valor),
     CONSTRAINT empresa_empresa_fk1 FOREIGN KEY(cnpj) REFERENCES public.empresas(cnpj) ON DELETE CASCADE,
     CONSTRAINT empresa_empresa_fk2 FOREIGN KEY(idcandidatura) REFERENCES public.candidaturas(idcandidatura) ON DELETE CASCADE
 

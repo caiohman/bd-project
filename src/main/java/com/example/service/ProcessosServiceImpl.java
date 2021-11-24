@@ -38,7 +38,7 @@ public class ProcessosServiceImpl implements ProcessosServiceInterface{
     }
 
     @Override
-    public Processos findById(long cpf) {
-        return processosRepository.findById(cpf);
+    public Processos findById(long idProcesso) {
+        return processosRepository.findById(idProcesso);
     }
 }

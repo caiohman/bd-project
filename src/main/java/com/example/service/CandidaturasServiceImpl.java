@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @ApplicationScoped
@@ -82,6 +84,5 @@ public class CandidaturasServiceImpl implements CandidaturasServiceInterface{
     public List<Candidaturas> listOrder(String attr) {
         return candidaturasRepository.list("order by ?1" , attr);
     }
-
 
 }

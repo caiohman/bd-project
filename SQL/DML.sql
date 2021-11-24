@@ -75,3 +75,40 @@ INSERT INTO public.doacaoEmpresa VALUES(18565583492119, 2, 2018, 50000);
 INSERT INTO public.processosjudiciais VALUES(1, TRUE, FALSE, '20/11/2015', 12345678940);
 INSERT INTO public.processosjudiciais VALUES(2, FALSE, TRUE, '20/11/2015', 10020045457);
 INSERT INTO public.processosjudiciais VALUES(3, FALSE, FALSE, '20/11/2015', 48159662125);
+
+
+-- Listagem  de  candidaturas,  considerando  ano,  nome  de  candidato
+-- ou  cargo,  e  combinações destes, segundo diferentes ordenações;
+
+-- ordenacao crescente pelo ano
+SELECT ano, individuos.nome, cargos.nome
+FROM Candidaturas
+         FULL OUTER JOIN Individuos
+                         ON Candidaturas.cpf = Individuos.cpf
+         FULL OUTER JOIN Cargos
+                         ON Candidaturas.idcargo = Cargos.idcargo
+GROUP BY candidaturas.ano, individuos.nome, cargos.nome
+HAVING individuos.nome <> 'null' AND cargos.nome <> 'null'
+ORDER BY ano ASC;
+
+-- ordenacao crescente pelo nome do candidato
+SELECT individuos.nome, ano, cargos.nome
+FROM Candidaturas
+         FULL OUTER JOIN Individuos
+                         ON Candidaturas.cpf = Individuos.cpf
+         FULL OUTER JOIN Cargos
+                         ON Candidaturas.idcargo = Cargos.idcargo
+GROUP BY candidaturas.ano, individuos.nome, cargos.nome
+HAVING individuos.nome <> 'null' AND cargos.nome <> 'null'
+ORDER BY individuos.nome ASC;
+
+-- ordenacao crescente pelo nome do cargo
+SELECT individuos.nome, ano, cargos.nome
+FROM Candidaturas
+         FULL OUTER JOIN Individuos
+                         ON Candidaturas.cpf = Individuos.cpf
+         FULL OUTER JOIN Cargos
+                         ON Candidaturas.idcargo = Cargos.idcargo
+GROUP BY candidaturas.ano, individuos.nome, cargos.nome
+HAVING individuos.nome <> 'null' AND cargos.nome <> 'null'
+ORDER BY individuos.nome ASC;

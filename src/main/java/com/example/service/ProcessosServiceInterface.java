@@ -12,5 +12,5 @@ public interface ProcessosServiceInterface {
 
     void delete(Processos processos);
 
-    Processos findById(long cpf);
+    Processos findById(long idProcesso);
 }

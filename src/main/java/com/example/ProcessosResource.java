@@ -27,9 +27,9 @@ public class ProcessosResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{cpf}")
-    public Processos listProcessosById(@PathParam("cpf") Long cpf) {
-        Processos entity = processosService.findById(cpf);
+    @Path("/{idProcesso}")
+    public Processos listProcessosById(@PathParam("idProcesso") Long idProcesso) {
+        Processos entity = processosService.findById(idProcesso);
 
         if(entity == null) {
             throw new NotFoundException();
@@ -47,9 +47,9 @@ public class ProcessosResource {
 
     @DELETE
     @Transactional
-    @Path("/{cpf}")
-    public void deleteProcessos(@PathParam("cpf") Long cpf) {
-        Processos entity = processosService.findById(cpf);
+    @Path("/{idProcesso}")
+    public void deleteProcessos(@PathParam("idProcesso") Long idProcesso) {
+        Processos entity = processosService.findById(idProcesso);
 
         if(entity == null) {
             throw new NotFoundException();

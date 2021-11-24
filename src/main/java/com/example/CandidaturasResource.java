@@ -89,4 +89,11 @@ public class CandidaturasResource {
         return candidaturasService.listOrder(attr);
     }
 
+    @GET
+    @Path("sortcpf/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Candidaturas> listSortCpf(@PathParam("name") String name) {
+        return candidaturasService.listOrder(name);
+    }
+
 }
