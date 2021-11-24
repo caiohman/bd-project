@@ -1,13 +1,35 @@
--- Listar todos as pessoas ficha limpa, isto é, que podem ser candidatas
--- Devido ao trigger utilizado para atualizar o atributo fichaLimpa, esta consulta está simplificada
-SELECT * FROM individuos I
-WHERE(I.fichaLimpa = TRUE);
+-- Listagem  de  candidaturas,  considerando  ano,  nome  de  candidato
+-- ou  cargo,  e  combinações destes, segundo diferentes ordenações;
 
---  Geração de relatório de candidaturas, indicando quais são os candidatos eleitos, inclusive os vices quando for o caso
-SELECT CG.nome, C.ano, I.nome, CA.vicecandidato, C.qtdvotos FROM candidaturas C
-	INNER JOIN cargos CG ON C.cargo = CG.idCargo
-	INNER JOIN candidatos CA ON C.candidato = CA.cpf
-	INNER JOIN individuos I ON CA.cpf = I.cpf
-GROUP BY CG.nome, C.ano, C.qtdvotos, I.nome, CA.vicecandidato
-ORDER BY CG.nome, C.ano, C.qtdvotos, I.nome, CA.vicecandidato;
+-- ordenacao crescente pelo ano
+SELECT ano, individuos.nome, cargos.nome
+FROM Candidaturas
+         FULL OUTER JOIN Individuos
+                         ON Candidaturas.cpf = Individuos.cpf
+         FULL OUTER JOIN Cargos
+                         ON Candidaturas.idcargo = Cargos.idcargo
+GROUP BY candidaturas.ano, individuos.nome, cargos.nome
+HAVING individuos.nome <> 'null' AND cargos.nome <> 'null'
+ORDER BY ano ASC;
 
+-- ordenacao crescente pelo nome do candidato
+SELECT individuos.nome, ano, cargos.nome
+FROM Candidaturas
+         FULL OUTER JOIN Individuos
+                         ON Candidaturas.cpf = Individuos.cpf
+         FULL OUTER JOIN Cargos
+                         ON Candidaturas.idcargo = Cargos.idcargo
+GROUP BY candidaturas.ano, individuos.nome, cargos.nome
+HAVING individuos.nome <> 'null' AND cargos.nome <> 'null'
+ORDER BY individuos.nome ASC;
+
+-- ordenacao crescente pelo nome do cargo
+SELECT individuos.nome, ano, cargos.nome
+FROM Candidaturas
+         FULL OUTER JOIN Individuos
+                         ON Candidaturas.cpf = Individuos.cpf
+         FULL OUTER JOIN Cargos
+                         ON Candidaturas.idcargo = Cargos.idcargo
+GROUP BY candidaturas.ano, individuos.nome, cargos.nome
+HAVING individuos.nome <> 'null' AND cargos.nome <> 'null'
+ORDER BY individuos.nome ASC;
