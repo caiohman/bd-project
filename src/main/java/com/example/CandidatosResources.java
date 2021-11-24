@@ -26,6 +26,20 @@ public class CandidatosResources {
         return candidatosServiceImp.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{cpf}")
+    public Candidatos listCandidatosById(@PathParam("cpf") Long cpf) {
+        Candidatos entity = candidatosServiceImp.findById(cpf);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Candidatos createCandidatos(Candidatos candidatos) {

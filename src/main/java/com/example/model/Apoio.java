@@ -13,7 +13,7 @@ public class Apoio {
     @Id
     private long idequipe;
 
-    @Column(name = "nome" , nullable = false)
+    @Column(name = "nomeEquipe" , nullable = false)
     @Size(max = 40)
     @NotBlank
     private String nome;

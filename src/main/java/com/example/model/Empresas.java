@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "participantesEquipe")
+@Table(name = "empresas")
 public class Empresas {
 
     @Id
-    private long cnpf;
+    private long cnpj;
 
     @Column(name = "nome" , nullable = false)
     @Size(max = 40)

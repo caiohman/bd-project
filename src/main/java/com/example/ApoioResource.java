@@ -27,6 +27,20 @@ public class ApoioResource {
         return apoioService.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{idequipe}")
+    public Apoio listApoioById(@PathParam("idequipe") Long idequipe) {
+        Apoio entity = apoioService.findById(idequipe);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Apoio createApoio(Apoio apoio) {

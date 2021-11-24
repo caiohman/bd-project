@@ -27,6 +27,20 @@ public class IndividuosResource {
         return individuosServiceImp.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{cpf}")
+    public Individuos listIndividuosById(@PathParam("cpf") Long cpf) {
+        Individuos entity = individuosServiceImp.findById(cpf);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Individuos createIndividuos(Individuos individuos) {

@@ -14,7 +14,7 @@ public class Participantes {
     @JoinColumn(name = "individuos")
     private long cpf;
 
-    @Column(name = "ano" , nullable = false)
+    @Column(name = "anoEquipe" , nullable = false)
     @NotBlank
     private Integer ano;
 

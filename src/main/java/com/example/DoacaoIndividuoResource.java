@@ -27,6 +27,20 @@ public class DoacaoIndividuoResource {
         return doacaoIndividuoService.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{cpf}")
+    public DoacaoIndividuo listDoacaoIndividuoById(@PathParam("cpf") Long cpf) {
+        DoacaoIndividuo entity = doacaoIndividuoService.findById(cpf);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public DoacaoIndividuo createDoacaoIndividuo(DoacaoIndividuo doacaoIndividuo) {

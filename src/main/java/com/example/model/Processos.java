@@ -16,19 +16,19 @@ public class Processos {
 
     @Column(name = "procedente" , nullable = false)
     @NotBlank
-    private long procedente;
+    private boolean procedente;
 
     @Column(name = "julgado" , nullable = false)
     @NotBlank
     private boolean julgado;
 
-    @Column(name = "dataTermino" , nullable = false)
+    @Column(name = "dataTermino" )
     @NotBlank
     private LocalDate dataTermino;
 
     @Column(name = "cpf" , nullable = false)
     @JoinColumn(name = "individuos")
     @NotBlank
-    private LocalDate cpf;
+    private long cpf;
 
 }

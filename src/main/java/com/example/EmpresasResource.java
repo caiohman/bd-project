@@ -27,6 +27,20 @@ public class EmpresasResource {
         return empresasService.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{cnpj}")
+    public Empresas listEmpresasById(@PathParam("cnpj") Long cnpj) {
+        Empresas entity = empresasService.findById(cnpj);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Empresas createEmpresas(Empresas empresas) {

@@ -27,6 +27,20 @@ public class DoacaoEmpresaResource {
         return doacaoEmpresaService.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{cnpj}")
+    public DoacaoEmpresa listDoacaoEmpresaById(@PathParam("cnpj") Long cnpj) {
+        DoacaoEmpresa entity = doacaoEmpresaService.findById(cnpj);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public DoacaoEmpresa createDoacaoEmpresa(DoacaoEmpresa doacaoEmpresa) {

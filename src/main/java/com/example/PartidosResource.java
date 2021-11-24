@@ -27,6 +27,20 @@ public class PartidosResource {
         return partidosServiceImp.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{sigla}")
+    public Partidos listPartidosByName(@PathParam("sigla") String sigla) {
+        Partidos entity = partidosServiceImp.findByName(sigla);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Partidos createPartidos(Partidos partidos) {

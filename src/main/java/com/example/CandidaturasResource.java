@@ -27,6 +27,20 @@ public class CandidaturasResource {
         return candidaturasService.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{idcandidatura}")
+    public Candidaturas listCandidaturasById(@PathParam("idcandidatura") Long idcandidatura) {
+        Candidaturas entity = candidaturasService.findById(idcandidatura);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Candidaturas createCandidaturas(Candidaturas candidaturas) {
@@ -67,5 +81,6 @@ public class CandidaturasResource {
     public List<Candidaturas> listByJobPosition(@PathParam("cargo") String cargo) {
       return candidaturasService.listByJobPosition(cargo);
     }
+
 
 }

@@ -27,6 +27,20 @@ public class DoadoresResource {
         return doadoresService.listAll();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{cpf}")
+    public Doadores listDoadoresById(@PathParam("cpf") Long cpf) {
+        Doadores entity = doadoresService.findById(cpf);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Doadores createDoadores(Doadores doadores) {

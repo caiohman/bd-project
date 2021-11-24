@@ -25,6 +25,20 @@ public class ProcessosResource {
         return processosService.listAll();
     };
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{cpf}")
+    public Processos listProcessosById(@PathParam("cpf") Long cpf) {
+        Processos entity = processosService.findById(cpf);
+
+        if(entity == null) {
+            throw new NotFoundException();
+        }
+        else {
+            return entity;
+        }
+    }
+
     @POST
     @Transactional
     public Processos createProcessos(Processos processos) {
